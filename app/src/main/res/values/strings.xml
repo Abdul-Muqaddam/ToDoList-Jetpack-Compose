@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">TODO tutorial</string>
+    <string name="gets_things_done_with_to_do">Gets things done with to Do</string>
+    <string name="lorem_ipsum_dolar_set_amit_how_are_you_doing_this_is_to_do_application">lorem ipsum dolar set amit how are you doing this is to do application</string>
+    <string name="get_started">Get Started</string>
+    <string name="welcome_onboarding">Welcome Onboarding!</string>
+    <string name="let_s_help_you_meet_up_your_tasks">Let’s help you meet up your Tasks</string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="learn_desiging">Learn desiging</string>
+    <string name="learn_development">Learn development</string>
+    <string name="add_task">Add Task</string>
+    <string name="task_details">Task Details</string>
+    <string name="your_task_name">Your Task Name</string>
+    <string name="description">Description</string>
+    <string name="priority">Priority</string>
+    <string name="high">High</string>
+    <string name="due_date">Due Date</string>
+    <string name="edit">Edit</string>
+    <string name="completed">Completed?</string>
+    <string name="add_new_task">Add New Task</string>
+    <string name="task_name">Task Name</string>
+</resources>
