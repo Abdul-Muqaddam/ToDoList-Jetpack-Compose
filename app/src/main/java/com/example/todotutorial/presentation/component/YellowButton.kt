@@ -9,9 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.todotutorial.ui.theme.orangeF34
+import com.example.todotutorial.ui.theme.MyColors
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 
@@ -23,7 +21,7 @@ fun YellowButton(navigatetoDashBoardScreen:()->Unit={},navigateToLoginInScreen:(
                   navigateToLoginInScreen()
                   navigatetoDashBoardScreen()},
         elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 6.sdp),
-        colors = ButtonDefaults.buttonColors(containerColor = orangeF34),
+        colors = ButtonDefaults.buttonColors(containerColor = MyColors.orangeF34),
         modifier = Modifier
 
             .fillMaxWidth()

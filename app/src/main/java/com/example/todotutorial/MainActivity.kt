@@ -11,9 +11,11 @@ import appModule
 
 import com.example.todotutorial.practice.Practice
 import com.example.todotutorial.practice.PracticeViewModel
+import com.example.todotutorial.presentation.LanguageScreen.LanguageScreen
 import com.example.todotutorial.presentation.add_todo_screen.AddTodoScreen
 import com.example.todotutorial.presentation.dashboard_screen.DashboardScreen
 import com.example.todotutorial.presentation.log_in_screen.LogInScreen
+import com.example.todotutorial.presentation.setting_screen.SettingScreen
 import com.example.todotutorial.presentation.sign_in_screen.Signin
 import com.example.todotutorial.presentation.splash_screen.SplashScreen
 import com.example.todotutorial.presentation.task_details_screen.TaskDetailsScreen
@@ -37,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     composable<Routes.SplashScreenRoute> {
                         SplashScreen(navigateToSiginScreen = {
-                            navController.navigate(Routes.SigInScreenRoute)
+                            navController.navigate(Routes.LogInScreenRoute)
                         })
                     }
                     composable<Routes.SigInScreenRoute> {
@@ -48,6 +50,8 @@ class MainActivity : ComponentActivity() {
                     composable<Routes.LogInScreenRoute> {
                         LogInScreen(navigateToDashboardScreen = {
                             navController.navigate(Routes.DashboardScreenRoute)
+                        },navigateToSigninScreen={
+                            navController.navigate(Routes.SigInScreenRoute)
                         })
                     }
                     composable<Routes.DashboardScreenRoute> {
@@ -55,10 +59,19 @@ class MainActivity : ComponentActivity() {
                             navController.navigate(Routes.AddTODOScreenRoute)
                         }, onNavigateToTaskDetailsScreen = {
                             navController.navigate(Routes.TaskDetailsScreen)
+                        }, NavigateToSettingScreen = {
+                            navController.navigate(Routes.SettingScreenRoute)
                         })
                     }
+                    composable<Routes.SettingScreenRoute> {
+                        SettingScreen(navigateToLanguageScreen ={
+                            navController.navigate(Routes.LanguageScreenRoute)
+                        } )
+                    }
                     composable<Routes.TaskDetailsScreen> {
-                        TaskDetailsScreen(navigateBack = {})
+                        TaskDetailsScreen(navigateBack = {
+                            navController.navigate(Routes.DashboardScreenRoute)
+                        })
                     }
                     composable<Routes.AddTODOScreenRoute> {
                         AddTodoScreen(navigateBack = {
@@ -67,6 +80,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable<Routes.Practice> {
                         Practice()
+                    }
+                    composable<Routes.LanguageScreenRoute> {
+                        LanguageScreen()
                     }
                 }
 
@@ -95,7 +111,14 @@ sealed class Routes() {
     object AddTODOScreenRoute
 
     @Serializable
+    object SettingScreenRoute
+
+    @Serializable
+    object LanguageScreenRoute
+
+    @Serializable
     object TaskDetailsScreen
+
     @Serializable
     object Practice
 }

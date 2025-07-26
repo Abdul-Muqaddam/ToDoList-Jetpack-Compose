@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.example.todotutorial.ui.theme.orangeF34
+import com.example.todotutorial.ui.theme.MyColors
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 
@@ -32,7 +32,7 @@ fun CurrentTask(isCheckedClicked:(Boolean)->Unit, text: Int, img: Int) {
             .padding(top = 25.sdp)
             .height(50.sdp)
             .padding(horizontal = 25.sdp)
-            .border(width = 2.sdp, color = orangeF34, shape = RoundedCornerShape(10.sdp)),
+            .border(width = 2.sdp, color = MyColors.orangeF34, shape = RoundedCornerShape(10.sdp)),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(

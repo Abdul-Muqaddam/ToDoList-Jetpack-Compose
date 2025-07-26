@@ -37,7 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.example.todotutorial.R
 import com.example.todotutorial.presentation.component.comman.TopBar
-import com.example.todotutorial.ui.theme.orangeF34
+import com.example.todotutorial.ui.theme.MyColors
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 
@@ -58,7 +58,7 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
             TopBar(navigateBack = { navigateBack() }, text = R.string.add_task)
         },
         containerColor = Color.White
-    ) { paddingValue ->
+    ) {padding->12.sdp
 
         Column(modifier = Modifier.padding()) {
             Column(
@@ -76,7 +76,7 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                             shape = RoundedCornerShape(bottomEnd = 50.sdp, bottomStart = 50.sdp)
                         )
                         .background(
-                            orangeF34,
+                            MyColors.orangeF34,
                             shape = RoundedCornerShape(bottomStart = 50.sdp, bottomEnd = 50.sdp)
                         )
                 ) {
@@ -113,7 +113,7 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                             .padding(horizontal = 25.sdp)
                             .border(
                                 width = 2.sdp,
-                                color = orangeF34,
+                                color = MyColors.orangeF34,
                                 shape = RoundedCornerShape(10.sdp)
                             ),
                         colors = TextFieldDefaults.colors(
@@ -136,7 +136,7 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                             .padding(horizontal = 25.sdp)
                             .border(
                                 width = 2.sdp,
-                                color = orangeF34,
+                                color = MyColors.orangeF34,
                                 shape = RoundedCornerShape(10.sdp)
                             ),
                         colors = TextFieldDefaults.colors(
@@ -159,7 +159,7 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                             .padding(horizontal = 25.sdp)
                             .border(
                                 width = 2.sdp,
-                                color = orangeF34,
+                                color = MyColors.orangeF34,
                                 shape = RoundedCornerShape(10.sdp)
                             ),
                         verticalAlignment = Alignment.CenterVertically
@@ -174,7 +174,7 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                             modifier = Modifier
                                 .weight(0.45f)
                                 .clickable { isExpanded = !isExpanded }) {
-                            Text(color = orangeF34,
+                            Text(color = Color.Black,
                                 modifier = Modifier.padding(end = 7.sdp),
                                 text = if(PriorityState.isEmpty()) {
                                     priorityList[0]
@@ -182,7 +182,7 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                                 PriorityState
                             })
                             Icon(
-                                tint = orangeF34,
+                                tint = MyColors.orangeF34,
                                 painter = painterResource(R.drawable.ic_addnote_dropdown),
                                 contentDescription = null
                             )
@@ -191,9 +191,9 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                                 expanded = isExpanded,
                                 onDismissRequest = { isExpanded = false }) {
                                 priorityList.map { item ->
-                                    DropdownMenuItem(colors = MenuDefaults.itemColors(orangeF34),  modifier = Modifier
+                                    DropdownMenuItem(colors = MenuDefaults.itemColors(MyColors.orangeF34),  modifier = Modifier
                                         .padding(top = 2.sdp)
-                                        .border(width = 2.sdp, color = orangeF34), text = { Text(text = item) }, onClick = {
+                                        .border(width = 2.sdp, color = MyColors.orangeF34), text = { Text(text = item) }, onClick = {
                                         PriorityState = item
                                         isExpanded=false
                                     })
@@ -211,7 +211,7 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                             .padding(horizontal = 25.sdp)
                             .border(
                                 width = 2.sdp,
-                                color = orangeF34,
+                                color = MyColors.orangeF34,
                                 shape = RoundedCornerShape(10.sdp)
                             ),
                         verticalAlignment = Alignment.CenterVertically
@@ -234,7 +234,7 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                         modifier = Modifier
                             .size(75.sdp)
                             .shadow(elevation = 6.sdp, shape = RoundedCornerShape(50.sdp))
-                            .background(color = orangeF34, shape = RoundedCornerShape(50.sdp)),
+                            .background(color = MyColors.orangeF34, shape = RoundedCornerShape(50.sdp)),
                         contentAlignment = Alignment.Center
                     ) {
                         Image(
