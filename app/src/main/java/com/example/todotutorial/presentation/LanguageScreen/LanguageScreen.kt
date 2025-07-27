@@ -98,7 +98,10 @@
 package com.example.todotutorial.presentation.LanguageScreen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -112,17 +115,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.todotutorial.R
+import androidx.compose.foundation.lazy.grid.items
 import com.example.todotutorial.ui.theme.MyColors
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 
 @Composable
-fun LanguageScreen() {
+fun LanguageScreen(navigateBckToSettingScreen:()->Unit) {
     var searchQuery by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
-            .fillMaxHeight()
             .padding(top = 30.sdp)
             .padding(horizontal = 15.sdp)
     ) {
@@ -138,6 +141,7 @@ fun LanguageScreen() {
                 modifier = Modifier
                     .width(18.sdp)
                     .height(13.sdp)
+                    .clickable { navigateBckToSettingScreen() }
             )
 
             Text(
@@ -164,7 +168,7 @@ fun LanguageScreen() {
             }
         }
 
-              SearchBar(
+        SearchBar(
             query = searchQuery,
             onQueryChange = { searchQuery = it }
         )
@@ -176,7 +180,7 @@ fun LanguageScreen() {
             elevation = CardDefaults.cardElevation(2.sdp),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 20.sdp)
+                .padding(top = 10.sdp)
         ) {
 
             Row(
@@ -210,8 +214,34 @@ fun LanguageScreen() {
             }
         }
 
+//        Column(
+//            modifier = Modifier
+//                .padding(top = 10.sdp)
+//                .padding(horizontal = 10.sdp)
+//        ) {
+
+
+            Text(
+                modifier = Modifier.padding(top = 15.sdp, bottom = 15.sdp),
+                text = "All Languages",
+                color = MyColors.orangeF34,
+                fontSize = 15.ssp
+            )
+
+            LazyVerticalGrid(columns = GridCells.Fixed(2),
+                horizontalArrangement = Arrangement.spacedBy(8.sdp),
+                verticalArrangement = Arrangement.spacedBy(8.sdp)
+            ) {
+                items(LanguagesModel.entries) { model ->
+                    LanguageScreenComponent(model)
+                }
+
+
+            }
+        }
+
     }
-}
+//}
 
 @Composable
 fun SearchBar(

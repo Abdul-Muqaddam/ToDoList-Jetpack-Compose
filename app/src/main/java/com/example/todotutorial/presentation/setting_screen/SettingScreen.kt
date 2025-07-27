@@ -115,7 +115,7 @@ fun SettingsScreenCard(mainImg: Int,
                        subText: Int,
                        rightImg: Int,
                        onClick:()-> Unit={}) {
-    Column(modifier = Modifier.padding(10.sdp)) {
+    Column(modifier = Modifier.padding(5.sdp)) {
 
         Card(
             onClick = onClick,
@@ -128,7 +128,7 @@ fun SettingsScreenCard(mainImg: Int,
 
             Row(
                 modifier = Modifier
-                    .padding(10.sdp),
+                    .padding(8.sdp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(

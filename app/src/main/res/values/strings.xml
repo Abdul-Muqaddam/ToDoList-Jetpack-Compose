@@ -45,4 +45,7 @@
     <string name="_1_01">1.01</string>
     <string name="apply">Apply</string>
     <string name="english_uk">English (UK)</string>
+    <string name="english">English</string>
+    <string name="afrikaans">Afrikaans</string>
+    <string name="albanian">Albanian</string>
 </resources>

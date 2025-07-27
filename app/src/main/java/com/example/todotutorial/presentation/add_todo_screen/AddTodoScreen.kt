@@ -35,6 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.todotutorial.R
 import com.example.todotutorial.presentation.component.comman.TopBar
 import com.example.todotutorial.ui.theme.MyColors

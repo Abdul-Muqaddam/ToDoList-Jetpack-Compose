@@ -39,7 +39,11 @@ class MainActivity : ComponentActivity() {
                 ) {
                     composable<Routes.SplashScreenRoute> {
                         SplashScreen(navigateToSiginScreen = {
-                            navController.navigate(Routes.LogInScreenRoute)
+                            navController.navigate(Routes.LogInScreenRoute){
+                                popUpTo(Routes.SplashScreenRoute){
+                                    inclusive=true
+                                }
+                            }
                         })
                     }
                     composable<Routes.SigInScreenRoute> {
@@ -49,7 +53,11 @@ class MainActivity : ComponentActivity() {
                     }
                     composable<Routes.LogInScreenRoute> {
                         LogInScreen(navigateToDashboardScreen = {
-                            navController.navigate(Routes.DashboardScreenRoute)
+                            navController.navigate(Routes.DashboardScreenRoute){
+                                popUpTo(Routes.LogInScreenRoute) {
+                                    inclusive = true
+                                }
+                            }
                         },navigateToSigninScreen={
                             navController.navigate(Routes.SigInScreenRoute)
                         })
@@ -82,7 +90,9 @@ class MainActivity : ComponentActivity() {
                         Practice()
                     }
                     composable<Routes.LanguageScreenRoute> {
-                        LanguageScreen()
+                        LanguageScreen(navigateBckToSettingScreen = {
+                            navController.navigate(Routes.SettingScreenRoute)
+                        })
                     }
                 }
 
