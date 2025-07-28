@@ -23,28 +23,40 @@ import ir.kaaveh.sdpcompose.sdp
 
 
 @Composable
-fun LanguageScreenComponent(model:LanguagesModel){
-        Card(
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            border = BorderStroke(1.sdp,MyColors.orangeF34),
+fun LanguageScreenComponent(model: LanguagesModel, languageSelected: (String) -> Unit) {
+    Card(
+        onClick = {
+            languageSelected(model.shortCode)
+        },
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        border = BorderStroke(
+            1.sdp,
+            MyColors.orangeF34
+        ),
+        modifier = Modifier
+            .width(150.sdp)
+            .height(90.sdp)
+    ) {
+        Column(
             modifier = Modifier
-                .width(150.sdp)
-                .height(90.sdp)
-        ) {
-            Column( modifier = Modifier
                 .fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
 
-                ) {
+            ) {
 
-                Image(painter = painterResource(model.img),
+            Image(
+                painter = painterResource(model.img),
                 contentDescription = null,
-                modifier = Modifier.size(30.sdp))
-            Text(text = model.languageName , modifier = Modifier.padding(top = 5.sdp))
-            Text(text = model.nativeName , modifier = Modifier.padding(top = 5.sdp
-            ))
-            }
-
+                modifier = Modifier.size(30.sdp)
+            )
+            Text(text = model.languageName, modifier = Modifier.padding(top = 5.sdp))
+            Text(
+                text = model.nativeName, modifier = Modifier.padding(
+                    top = 5.sdp
+                )
+            )
         }
+
     }
+}

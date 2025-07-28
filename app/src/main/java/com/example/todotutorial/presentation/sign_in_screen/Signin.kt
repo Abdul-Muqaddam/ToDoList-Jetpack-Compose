@@ -207,9 +207,7 @@ fun Signin(navigateToLogInScreen: () -> Unit) {
             )
         }
         Box(modifier = Modifier.weight(0.3f)) {
-            YellowButton(navigateToLoginInScreen = {
-                navigateToLogInScreen()
-            }, text = stringResource(R.string.register))
+
         }
         Row(
             modifier = Modifier

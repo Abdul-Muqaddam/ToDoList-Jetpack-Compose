@@ -15,11 +15,12 @@ import ir.kaaveh.sdpcompose.ssp
 
 
 @Composable
-fun YellowButton(navigatetoDashBoardScreen:()->Unit={},navigateToLoginInScreen:()->Unit?={}, navigateToSigninScreen:()->Unit?={}, text: String){
+fun YellowButton(
+    navigatetoDashBoardScreen: () -> Unit = {},
+    text: String
+) {
     Button(
-        onClick = {navigateToSigninScreen()
-                  navigateToLoginInScreen()
-                  navigatetoDashBoardScreen()},
+        onClick = { navigatetoDashBoardScreen() },
         elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 6.sdp),
         colors = ButtonDefaults.buttonColors(containerColor = MyColors.orangeF34),
         modifier = Modifier

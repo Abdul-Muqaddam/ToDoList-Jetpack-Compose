@@ -38,12 +38,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.todotutorial.R
 import com.example.todotutorial.presentation.component.comman.TopBar
+import com.example.todotutorial.presentation.dashboard_screen.DashboardViewModel
 import com.example.todotutorial.ui.theme.MyColors
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun AddTodoScreen(navigateBack: () -> Unit) {
+fun AddTodoScreen(navigateBack: () -> Unit, viewModel: DashboardViewModel = koinViewModel()) {
     var priorityList = listOf("Low", "Medium", "High")
 
     var isExpanded by remember { mutableStateOf(false) }
@@ -59,7 +61,8 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
             TopBar(navigateBack = { navigateBack() }, text = R.string.add_task)
         },
         containerColor = Color.White
-    ) {padding->12.sdp
+    ) { padding ->
+        12.sdp
 
         Column(modifier = Modifier.padding()) {
             Column(
@@ -175,29 +178,35 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
                             modifier = Modifier
                                 .weight(0.45f)
                                 .clickable { isExpanded = !isExpanded }) {
-                            Text(color = Color.Black,
+                            Text(
+                                color = Color.Black,
                                 modifier = Modifier.padding(end = 7.sdp),
-                                text = if(PriorityState.isEmpty()) {
+                                text = if (PriorityState.isEmpty()) {
                                     priorityList[0]
-                            } else {
-                                PriorityState
-                            })
+                                } else {
+                                    PriorityState
+                                }
+                            )
                             Icon(
                                 tint = MyColors.orangeF34,
                                 painter = painterResource(R.drawable.ic_addnote_dropdown),
                                 contentDescription = null
                             )
                             DropdownMenu(
-                                containerColor = Color.White ,
+                                containerColor = Color.White,
                                 expanded = isExpanded,
                                 onDismissRequest = { isExpanded = false }) {
                                 priorityList.map { item ->
-                                    DropdownMenuItem(colors = MenuDefaults.itemColors(MyColors.orangeF34),  modifier = Modifier
-                                        .padding(top = 2.sdp)
-                                        .border(width = 2.sdp, color = MyColors.orangeF34), text = { Text(text = item) }, onClick = {
-                                        PriorityState = item
-                                        isExpanded=false
-                                    })
+                                    DropdownMenuItem(
+                                        colors = MenuDefaults.itemColors(MyColors.orangeF34),
+                                        modifier = Modifier
+                                            .padding(top = 2.sdp)
+                                            .border(width = 2.sdp, color = MyColors.orangeF34),
+                                        text = { Text(text = item) },
+                                        onClick = {
+                                            PriorityState = item
+                                            isExpanded = false
+                                        })
                                 }
                             }
                         }
@@ -233,9 +242,16 @@ fun AddTodoScreen(navigateBack: () -> Unit) {
 
                     Box(
                         modifier = Modifier
+                            .clickable {
+                                navigateBack()
+                                viewModel.addTask(taskName = TaskNameState, taskDescription = TaskDescription)
+                            }
                             .size(75.sdp)
                             .shadow(elevation = 6.sdp, shape = RoundedCornerShape(50.sdp))
-                            .background(color = MyColors.orangeF34, shape = RoundedCornerShape(50.sdp)),
+                            .background(
+                                color = MyColors.orangeF34,
+                                shape = RoundedCornerShape(50.sdp)
+                            ),
                         contentAlignment = Alignment.Center
                     ) {
                         Image(

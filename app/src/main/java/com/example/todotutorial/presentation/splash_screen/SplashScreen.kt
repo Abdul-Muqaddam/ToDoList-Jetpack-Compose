@@ -22,7 +22,7 @@ import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 
 @Composable
-fun SplashScreen(navigateToSiginScreen:()->Unit) {
+fun SplashScreen(navigateToDashboardScreen: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -33,8 +33,7 @@ fun SplashScreen(navigateToSiginScreen:()->Unit) {
         Image(
             modifier = Modifier
                 .weight(1f)
-                .fillMaxWidth()
-                ,
+                .fillMaxWidth(),
             painter = painterResource(R.drawable.undraw_reminders),
             contentDescription = null
         )
@@ -59,10 +58,11 @@ fun SplashScreen(navigateToSiginScreen:()->Unit) {
                 text = stringResource(R.string.lorem_ipsum_dolar_set_amit_how_are_you_doing_this_is_to_do_application)
             )
         }
-        Row(modifier = Modifier.weight(0.25f) ,) {
+        Row(modifier = Modifier.weight(0.25f)) {
 
-            YellowButton(navigateToSigninScreen = {
-                navigateToSiginScreen()
+            YellowButton(navigatetoDashBoardScreen = {
+
+                navigateToDashboardScreen()
             }, text = stringResource(R.string.get_started))
 
         }

@@ -31,16 +31,24 @@ import com.example.todotutorial.presentation.dashboard_screen.components.TaskBar
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 import android.util.Log
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
+import com.example.todotutorial.data.entity.TaskEntitiy
 import com.example.todotutorial.ui.theme.MyColors
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun DashboardScreen(
     onNavigateToTaskDetailsScreen: () -> Unit,
     navigateToAddToDoScreen: () -> Unit,
-    NavigateToSettingScreen:()->Unit
+    NavigateToSettingScreen: () -> Unit,
+    viewModel: DashboardViewModel = koinViewModel()
 ) {
     var isChecked by remember { mutableStateOf(false) }
+    val taskList by viewModel.task.collectAsState()
     Column {
         Column(modifier = Modifier) {
 
@@ -111,24 +119,30 @@ fun DashboardScreen(
                     .padding(top = 20.sdp),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.ssp,
-                text = "Pending Task",
+                text = stringResource(R.string.pending_task),
                 color = MyColors.orangeF34
             )
-            Column(modifier = Modifier.clickable {
-                onNavigateToTaskDetailsScreen()
-            }) {
 
-                CurrentTask(
-                    img = if (isChecked == true) {
-                        R.drawable.ic_dashboard_checkmark
-                    } else {
-                        R.drawable.ic_dashboard_emptycheckmark
-                    },
-                    text = R.string.learn_desiging,
-                    isCheckedClicked = {
-                        isChecked = it
-                    }
-                )
+
+            LazyColumn() {
+                items(taskList) { task->
+                    CurrentTask(
+//                        img = if (isChecked == true) {
+//                            R.drawable.ic_dashboard_checkmark
+//                        } else {
+//                            R.drawable.ic_dashboard_emptycheckmark
+//                        },
+//                        text = R.string.learn_desiging,
+//                        isCheckedClicked = {
+//                            isChecked = it
+//                        },
+                        onCompletedClick={
+                          viewModel.toggleCompletion(task.copy(isCompleted =it ))
+                        },
+                        taskList = task
+                    )
+//                }
+                }
             }
 //            CurrentTask(
 //                img = R.drawable.ic_dashboard_emptycheckmark,
