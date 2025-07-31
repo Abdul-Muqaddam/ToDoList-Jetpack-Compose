@@ -28,17 +28,29 @@ import androidx.compose.ui.text.font.FontWeight
 import com.example.todotutorial.R
 import com.example.todotutorial.presentation.dashboard_screen.components.CurrentTask
 import com.example.todotutorial.presentation.dashboard_screen.components.TaskBarIcon
-import com.example.todotutorial.ui.theme.orangeF34
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 import android.util.Log
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
+import com.example.todotutorial.data.entity.TaskEntitiy
+import com.example.todotutorial.ui.theme.MyColors
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun DashboardScreen(onNavigateToTaskDetailsScreen:()->Unit, navigateToAddToDoScreen:()->Unit) {
+fun DashboardScreen(
+    onNavigateToTaskDetailsScreen: () -> Unit,
+    navigateToAddToDoScreen: () -> Unit,
+    NavigateToSettingScreen: () -> Unit,
+    viewModel: DashboardViewModel = koinViewModel()
+) {
     var isChecked by remember { mutableStateOf(false) }
+    val taskList by viewModel.task.collectAsState()
     Column {
-        Column(modifier = Modifier.weight(1f)) {
+        Column(modifier = Modifier) {
 
             Box(
                 modifier = Modifier
@@ -48,7 +60,7 @@ fun DashboardScreen(onNavigateToTaskDetailsScreen:()->Unit, navigateToAddToDoScr
                         shape = RoundedCornerShape(bottomStart = 50.sdp, bottomEnd = 50.sdp)
                     )
                     .background(
-                        color = orangeF34,
+                        color = MyColors.orangeF34,
                         shape = RoundedCornerShape(bottomStart = 50.sdp, bottomEnd = 50.sdp)
                     )
                     .fillMaxWidth()
@@ -88,40 +100,49 @@ fun DashboardScreen(onNavigateToTaskDetailsScreen:()->Unit, navigateToAddToDoScr
         }
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.4f),
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             Image(
-                modifier = Modifier.size(100.sdp),
+                modifier = Modifier
+                    .size(130.sdp)
+                    .padding(top = 20.sdp),
                 painter = painterResource(R.drawable.group69),
                 contentDescription = null
             )
         }
-        Column() {
+        Column(modifier = Modifier.weight(1f)) {
             Text(
-                modifier = Modifier.padding(horizontal = 25.sdp),
+                modifier = Modifier
+                    .padding(horizontal = 25.sdp)
+                    .padding(top = 20.sdp),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.ssp,
-                text = "Pending Task",
-                color = orangeF34
+                text = stringResource(R.string.pending_task),
+                color = MyColors.orangeF34
             )
-            Column (modifier = Modifier.clickable {
-                onNavigateToTaskDetailsScreen()
-            }){
 
-                CurrentTask(
-                    img = if (isChecked == true) {
-                        R.drawable.ic_dashboard_checkmark
-                    } else {
-                        R.drawable.ic_dashboard_emptycheckmark
-                    },
-                    text = R.string.learn_desiging,
-                    isCheckedClicked = {
-                        isChecked=it
-                    }
-                )
+
+            LazyColumn() {
+                items(taskList) { task->
+                    CurrentTask(
+//                        img = if (isChecked == true) {
+//                            R.drawable.ic_dashboard_checkmark
+//                        } else {
+//                            R.drawable.ic_dashboard_emptycheckmark
+//                        },
+//                        text = R.string.learn_desiging,
+//                        isCheckedClicked = {
+//                            isChecked = it
+//                        },
+                        onCompletedClick={
+                          viewModel.toggleCompletion(task.copy(isCompleted =it ))
+                        },
+                        taskList = task
+                    )
+//                }
+                }
             }
 //            CurrentTask(
 //                img = R.drawable.ic_dashboard_emptycheckmark,
@@ -130,18 +151,18 @@ fun DashboardScreen(onNavigateToTaskDetailsScreen:()->Unit, navigateToAddToDoScr
 
 
         }
-        Column(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .offset(y = 26.sdp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
             Box(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier.clickable { navigateToAddToDoScreen() }
-                    .padding(end = 5.sdp)
+                modifier = Modifier
+                    .clickable { navigateToAddToDoScreen() }
+                    .padding(bottom = 25.sdp, end = 5.sdp)
                     .size(40.sdp)
-                    .background(orangeF34, shape = RoundedCornerShape(50.sdp))
+                    .background(MyColors.orangeF34, shape = RoundedCornerShape(50.sdp))
             ) {
                 Image(
                     modifier = Modifier.size(18.sdp),
@@ -149,16 +170,23 @@ fun DashboardScreen(onNavigateToTaskDetailsScreen:()->Unit, navigateToAddToDoScr
                     contentDescription = null
                 )
             }
-            Box(modifier = Modifier.offset(y = -25.sdp)) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(alignment = Alignment.BottomCenter)
+
+            ) {
                 Image(
                     painter = painterResource(R.drawable.taskbar),
                     contentDescription = null,
                     modifier = Modifier
+                        .fillMaxWidth()
                 )
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(50.sdp),
+                        .align(alignment = Alignment.BottomCenter)
+                        .padding(bottom = 15.sdp),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -181,7 +209,8 @@ fun DashboardScreen(onNavigateToTaskDetailsScreen:()->Unit, navigateToAddToDoScr
                     )
                     TaskBarIcon(
                         modifier = Modifier
-                            .size(25.sdp),
+                            .size(25.sdp)
+                            .clickable { NavigateToSettingScreen() },
                         img = R.drawable.ic_dashboard_settings_gare
                     )
                 }

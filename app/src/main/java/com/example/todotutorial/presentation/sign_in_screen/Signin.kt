@@ -35,15 +35,12 @@ import androidx.compose.ui.text.style.TextAlign
 import com.example.todotutorial.R
 import com.example.todotutorial.presentation.component.IntersectingCircleImage
 import com.example.todotutorial.presentation.component.YellowButton
-import com.example.todotutorial.ui.theme.greyD56
-import com.example.todotutorial.ui.theme.greyD56_80
-import com.example.todotutorial.ui.theme.greyEEE
-import com.example.todotutorial.ui.theme.orangeF34
+import com.example.todotutorial.ui.theme.MyColors
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 
 @Composable
-fun Signin(navigateToLogInScreen:()->Unit) {
+fun Signin(navigateToLogInScreen: () -> Unit) {
 
 
     var f_name by remember { mutableStateOf("") }
@@ -59,7 +56,7 @@ fun Signin(navigateToLogInScreen:()->Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = greyEEE)
+            .background(color = MyColors.greyEEE)
     ) {
 
 
@@ -70,7 +67,7 @@ fun Signin(navigateToLogInScreen:()->Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.welcome_onboarding),
                 textAlign = TextAlign.Center,
-                color = greyD56,
+                color = MyColors.greyD56,
                 fontSize = 26.ssp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -78,7 +75,7 @@ fun Signin(navigateToLogInScreen:()->Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.let_s_help_you_meet_up_your_tasks),
                 textAlign = TextAlign.Center,
-                color = greyD56_80
+                color = MyColors.greyD56_80
             )
         }
         Column(modifier = Modifier.weight(1f)) {
@@ -209,10 +206,8 @@ fun Signin(navigateToLogInScreen:()->Unit) {
                 }
             )
         }
-        Box(modifier = Modifier.weight(0.3f) ) {
-            YellowButton(navigateToLoginInScreen = {
-                navigateToLogInScreen()
-            }, text = stringResource(R.string.register))
+        Box(modifier = Modifier.weight(0.3f)) {
+
         }
         Row(
             modifier = Modifier
@@ -221,7 +216,13 @@ fun Signin(navigateToLogInScreen:()->Unit) {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(text = stringResource(R.string.already_have_an_account))
-            Text(text = stringResource(R.string.sign_in), color = orangeF34 , fontWeight = FontWeight.Bold, fontSize = 15.ssp)
+            Text(
+                modifier = Modifier.clickable { navigateToLogInScreen() },
+                text = stringResource(R.string.login),
+                color = MyColors.orangeF34,
+                fontWeight = FontWeight.Bold,
+                fontSize = 15.ssp
+            )
         }
     }
 }

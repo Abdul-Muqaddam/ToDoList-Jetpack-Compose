@@ -2,6 +2,7 @@ package com.example.todotutorial.presentation.log_in_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,19 +24,20 @@ import androidx.compose.ui.text.style.TextAlign
 import com.example.todotutorial.R
 import com.example.todotutorial.presentation.component.IntersectingCircleImage
 import com.example.todotutorial.presentation.component.YellowButton
-import com.example.todotutorial.ui.theme.greyD56
-import com.example.todotutorial.ui.theme.greyEEE
-import com.example.todotutorial.ui.theme.orangeF34
+import com.example.todotutorial.ui.theme.MyColors
 import ir.kaaveh.sdpcompose.sdp
 import ir.kaaveh.sdpcompose.ssp
 
 
 @Composable
-fun LogInScreen(navigateToDashboardScreen:()->Unit) {
+fun LogInScreen(
+    navigateToDashboardScreen: () -> Unit,
+    navigateToSigninScreen: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = greyEEE)
+            .background(color = MyColors.greyEEE)
     ) {
         IntersectingCircleImage()
         Column(
@@ -43,9 +45,11 @@ fun LogInScreen(navigateToDashboardScreen:()->Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Column(modifier = Modifier
-                .padding(bottom = 8.sdp)
-                .weight(1f)) {
+            Column(
+                modifier = Modifier
+                    .padding(bottom = 8.sdp)
+                    .weight(1f)
+            ) {
                 Text(
                     modifier = Modifier
                         .padding(bottom = 8.sdp)
@@ -53,7 +57,7 @@ fun LogInScreen(navigateToDashboardScreen:()->Unit) {
                     text = "Welcome Back!",
                     textAlign = TextAlign.Center,
                     fontSize = 28.ssp,
-                    color = greyD56,
+                    color = MyColors.greyD56,
                     fontWeight = FontWeight.SemiBold
                 )
                 Image(
@@ -105,10 +109,15 @@ fun LogInScreen(navigateToDashboardScreen:()->Unit) {
                     )
                 )
             }
-            Text(modifier = Modifier.weight(0.15f), text = "Forget Password", color = orangeF34)
-            Column (modifier = Modifier.weight(0.25f)){
+            Text(
+                modifier = Modifier
+                    .weight(0.15f),
+                text = "Forget Password",
+                color = MyColors.orangeF34
+            )
+            Column(modifier = Modifier.weight(0.25f)) {
 
-                YellowButton(navigatetoDashBoardScreen = navigateToDashboardScreen , text = "Login")
+                YellowButton(navigatetoDashBoardScreen = navigateToDashboardScreen, text = "Login")
             }
             Row(
                 modifier = Modifier
@@ -116,10 +125,11 @@ fun LogInScreen(navigateToDashboardScreen:()->Unit) {
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = stringResource(R.string.already_have_an_account))
+                Text(text = stringResource(R.string.i_don_t_have_an_account))
                 Text(
+                    modifier = Modifier.clickable { navigateToSigninScreen() },
                     text = stringResource(R.string.sign_in),
-                    color = orangeF34,
+                    color = MyColors.orangeF34,
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.ssp
                 )
